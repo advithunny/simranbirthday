@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎀 The Magical Birthday Countdown 🎀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(-45deg, #ffb6c1, #e0c3fc, #ffe6f0, #f3d1f4);
+      background-size: 600% 600%;
+      animation: gradientShift 18s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #6c217d;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3.5em;
+      color: #ca2c92;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px rgba(255, 182, 193, 0.7);
+      animation: fadeIn 2s ease-in-out, floatGlow 6s ease-in-out infinite;
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translateY(0); text-shadow: 0 0 10px #ffc0cb; }
+      50% { transform: translateY(-10px); text-shadow: 0 0 20px #fff; }
+    }
+
+    #countdown {
+      display: flex;
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 30px;
+      padding: 30px 50px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+      animation: pulseScale 5s ease-in-out infinite alternate, glowBorder 7s ease-in-out infinite;
+    }
+
+    @keyframes pulseScale {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+
+    @keyframes glowBorder {
+      0%, 100% { box-shadow: 0 0 15px #ffe6f0, 0 0 25px #ff99cc; }
+      50% { box-shadow: 0 0 30px #ffccff, 0 0 40px #ffd1dc; }
+    }
+
+    .unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 2.5em;
+      color: #5a2a83;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .unit:nth-child(2) { animation-delay: 0.6s; }
+    .unit:nth-child(3) { animation-delay: 1.2s; }
+    .unit:nth-child(4) { animation-delay: 1.8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .label {
+      font-size: 0.6em;
+      color: #8e44ad;
+      margin-top: 5px;
+    }
+
+    #happy {
+      font-size: 3.2em;
+      margin-top: 35px;
+      color: #e91e63;
+      display: none;
+      animation: sparkle 2s ease infinite, riseUp 2s ease forwards;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { text-shadow: 0 0 8px #fff, 0 0 15px #ffc0cb; }
+      50% { text-shadow: 0 0 18px #fff, 0 0 25px #ff99cc; }
+    }
+
+    @keyframes riseUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .confetti {
+      position: absolute;
+      top: -10px;
+      font-size: 24px;
+      animation: fall 8s linear infinite;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    .magic-glow {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,192,203,0.5) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.1); opacity: 0.9; }
+    }
+
+    .surprise-message {
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.2em;
+      color: #842d72;
+      opacity: 0.8;
+      animation: fadeInUp 3s ease 2s forwards;
+      font-family: 'Pacifico', cursive;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="magic-glow"></div>
+
+  <h1>🎉 The Magical Day is Coming! 🎀</h1>
+  <div id="countdown">
+    <div class="unit">
+      <span id="days">0</span>
+      <span class="label">Days</span>
+    </div>
+    <div class="unit">
+      <span id="hours">0</span>
+      <span class="label">Hours</span>
+    </div>
+    <div class="unit">
+      <span id="minutes">0</span>
+      <span class="label">Minutes</span>
+    </div>
+    <div class="unit">
+      <span id="seconds">0</span>
+      <span class="label">Seconds</span>
+    </div>
+  </div>
+  <div id="happy">🌟 Happy Birthday Gorgeous! 🌸</div>
+  <div class="surprise-message">You're a dream wrapped in glitter and magic ✨</div>
+
+  <script>
+    const birthday = new Date("2025-05-18T00:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = birthday - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("happy").style.display = "block";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    const emojis = ["🧫", "✨", "🌸", "🌟", "💫"];
+    setInterval(() => {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.animationDuration = `${4 + Math.random() * 6}s`;
+      confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      confetti.style.fontSize = `${20 + Math.random() * 20}px`;
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 10000);
+    }, 300);
+
+    document.body.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+      const dummy = document.createElement("input");
+      document.body.appendChild(dummy);
+      dummy.value = window.location.href;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      alert("🎉 Happy Birthday To The Most Beautiful Girl!");
+    });
+  </script>
+</body>
+</html>
